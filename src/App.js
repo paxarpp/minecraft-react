@@ -13,7 +13,9 @@ function App() {
 
   return (
     <Canvas shadowMap sRGB gl={{ alpha: false }}>
+    
       <Camera />
+    
       <Sky sunPosition={new Vector3(100, 10, 100)}/>
       <ambientLight intensity={0.3}/>
       <pointLight 
@@ -28,7 +30,9 @@ function App() {
         {
           cubes.map(cube => cube)
         }
+
       </Physics>
+
     </Canvas>
   )
 }
