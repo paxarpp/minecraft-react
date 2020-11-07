@@ -1,0 +1,27 @@
+name: Unit + UI Testing
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  unit-ui-testing:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staring Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with: 
+          node-version: ${{ matrix.node-version }}
+      - name: Bootstraping packages
+        run: yarn install
+      - name: Testing Shared Utils
+        if: always()
+        run: yarn jest ./shared
+      - name: Testing Storybook UI
+        if: always()
+        run: yarn storybook:build
